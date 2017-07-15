@@ -1,7 +1,13 @@
 Exec { path => '/bin:/usr/bin' }
 
+
+
 exec { "ssh_keygen-root" :
 	command => "ssh-keygen -t rsa -b 2048 -N '' -f /root/.ssh/id_rsa",
+}
+
+file { "/root/.ssh/authorized_keys" :
+	ensure => present
 }
 
 exec { "copy_authorized_keys" :

@@ -15,22 +15,16 @@ openshift_metrics_hawkular_hostname=hawkular-metric.devopshumans.com
 openshift_hosted_metrics_deploy=true
 openshift_disable_check=docker_storage,memory_availability
 openshift_master_overwrite_named_certificates=true
-openshift_hosted_metrics_storage_kind=nfs
-openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
-openshift_hosted_metrics_storage_host=console.devopshumans.com
-openshift_hosted_metrics_storage_nfs_directory=/nfs/metrics
-openshift_hosted_metrics_storage_volume_name=metrics
-openshift_hosted_metrics_storage_volume_size=10Gi
-openshift_hosted_metrics_storage_labels={'storage': 'metrics'}
-
+openshift_hosted_router_selector='region=infra'
+openshift_hosted_metrics_deployer_version=v1.5.0
 
 [masters]
-console.devopshumans.com openshift_schedulable=true
+oshift-master openshift_schedulable=true
 
 [etcd]
-console.devopshumans.com
+oshift-master
 
 [nodes]
-openshift-compute-east1-b.devopshumans.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
-openshift-compute-east1-c.devopshumans.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
+oshift-master openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
+oshift-compute openshift_node_labels="{'region': 'compute', 'zone': 'default'}" openshift_schedulable=true
 
