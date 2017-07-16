@@ -1,1 +1,9 @@
 # openshift-ansible-installer
+1. git clone https://github.com/openshift/openshift-ansible. 
+2. In the project directory, checkout the correct branch: 
+git checkout release-1.5
+3. Run: 
+```
+ansible-playbook -i openshift-ansible-installer/all-in-one.yml openshift-ansible/playbooks/byo/config.yml
+```
+
