@@ -1,4 +1,4 @@
-Exec { path => '/bin:/usr/bin' }
+exec { path => '/bin:/usr/bin' }
 
 
 

@@ -1,6 +1,7 @@
 [OSEv3:children]
 masters
 nodes
+etcd
 
 [OSEv3:vars]
 ansible_ssh_user=root
@@ -9,22 +10,20 @@ openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 
 containerized=true
 openshift_release=v1.5.0
 openshift_image_tag=v1.5.0
-openshift_public_hostname=console.devopshumans.com
+openshift_public_hostname=mymaster.devopshumans.com
 openshift_master_default_subdomain=cloudapps.devopshumans.com
-openshift_metrics_hawkular_hostname=hawkular-metric.devopshumans.com
-openshift_hosted_metrics_deploy=true
+openshift_hosted_metrics_deploy=false
 openshift_disable_check=docker_storage,memory_availability
 openshift_master_overwrite_named_certificates=true
 openshift_hosted_router_selector='region=infra'
-openshift_hosted_metrics_deployer_version=v1.5.0
+enable_excluders=false
 
 [masters]
-oshift-master openshift_schedulable=true
+mymaster.devopshumans.com openshift_schedulable=true
 
 [etcd]
-oshift-master
+mymaster.devopshumans.com
 
 [nodes]
-oshift-master openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
-oshift-compute openshift_node_labels="{'region': 'compute', 'zone': 'default'}" openshift_schedulable=true
+mymaster.devopshumans.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
 
