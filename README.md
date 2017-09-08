@@ -46,6 +46,16 @@ git checkout release-1.5
 ansible-playbook -i openshift-ansible-installer/all-in-one.yml openshift-ansible/playbooks/byo/config.yml
 ```
 
+## Post-In
+1. In the inventory file above, we are using htpass as the credentials mean. To access the dashboard, create htpass:
+```
+htpasswd -c /etc/origin/master/htpasswd userone
+```
+Note: For subsequent user remove the `-c` flag, or your previous /etc/origin/master/htpasswd will be gone.  
+2. Access the dashboard at https://yourhost.example.com:8443.  
+
+
+
 ## Scale Up. 
 official guide: https://docs.openshift.org/latest/install_config/adding_hosts_to_existing_cluster.html 
 
@@ -54,6 +64,5 @@ official guide: https://docs.openshift.org/latest/install_config/adding_hosts_to
 ```
 ansible-playbook -i openshift-ansible-installer/add-node.yml openshift-ansible/playbook/byo/openshift-node/scaleup.yml
 ```
-
 
 
