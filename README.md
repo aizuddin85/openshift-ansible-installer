@@ -1,7 +1,12 @@
 # openshift-ansible-installer.
 Environment:  
 1. GCE Platform  
-2. CentOS 7 GCE Official Image  
+2. CentOS 7 GCE Official Image 
+3. Skipped checked:  
+ - docker_storage
+ - memory_availability
+ - disk_availability
+
 
 ## Pre-Req  
 1. Install required packages.  
