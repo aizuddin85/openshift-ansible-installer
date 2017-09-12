@@ -13,7 +13,7 @@ openshift_image_tag=v1.5.0
 openshift_public_hostname=mymaster.devopshumans.com
 openshift_master_default_subdomain=cloudapps.devopshumans.com
 openshift_hosted_metrics_deploy=false
-openshift_disable_check=docker_storage,memory_availability
+openshift_disable_check=docker_storage,memory_availability,disk_availability
 openshift_master_overwrite_named_certificates=true
 openshift_hosted_router_selector='region=infra'
 enable_excluders=false
