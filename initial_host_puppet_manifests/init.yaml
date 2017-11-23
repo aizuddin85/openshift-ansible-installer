@@ -1,0 +1,51 @@
+- hosts: "{{ host | default('localhost') }}"
+  tasks:
+    - name: install java deps
+      package:
+        name: java-1.8.0-openjdk-headless
+        state: latest
+    - name: install pyOpenSSL deps
+      package:
+        name: pyOpenSSL
+        state: latest
+    - name: install python-passlib deps
+      package:
+        name: python-passlib
+        state: latest
+    - name: install python2-crypt deps
+      package:
+        name: python2-cryptography
+        state: latest
+    - name: install bind-utils deps
+      package:
+        name: bind-utils
+        state: latest
+    - name: install python-rhsm-cert deps
+      package:
+        name: python-rhsm-certificates
+        state: latest 
+    - name: add root ssh key-pair
+      user:
+        name: root
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
+    - name: ensure authorized_keys configured for root
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+    - name: update /etc/ssh/sshd_config to allow only pubkey login
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^PermitRootLogin"
+        line: "PermitRootLogin without-password"
+        insertafter: EOF
+        state: present
+      register: ssh_config
+    - name: restarting ssh
+      service:
+        name: sshd
+        state: restarted
+      when: ssh_config.changed
+
